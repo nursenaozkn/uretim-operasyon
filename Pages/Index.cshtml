@@ -1,0 +1,93 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Üretim Operasyon Bildirimleri";
+}
+
+<h1>Üretim Operasyon Bildirimleri</h1>
+<p class="aciklama">
+    Aşağıdaki <strong>Tablo 1</strong> (operasyon bildirimleri) ve <strong>Tablo 2</strong>
+    (standart duruşlar) verileri bellekte tutulur. <strong>Hesapla</strong> butonuna
+    basıldığında standart molalar üretim aralıklarının içine otomatik yerleştirilerek
+    <strong>Tablo 3</strong> hesaplanır.
+</p>
+
+<div class="tablolar">
+    <section>
+        <h2>Tablo 1 — Mevcut Kayıtlı Veriler</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kayıt No</th><th>Başlangıç</th><th>Bitiş</th>
+                    <th>Toplam Süre</th><th>Statü</th><th>Duruş Nedeni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var k in Model.Tablo1)
+                {
+                    <tr>
+                        <td>@k.KayitNo</td>
+                        <td>@k.Baslangic.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@k.Bitis.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@k.ToplamSureMetin</td>
+                        <td>@k.Statu</td>
+                        <td>@k.DurusNedeni</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Tablo 2 — Standart Duruşlar</h2>
+        <table>
+            <thead>
+                <tr><th>Başlangıç</th><th>Bitiş</th><th>Duruş Nedeni</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model.Tablo2)
+                {
+                    <tr>
+                        <td>@d.Baslangic.ToString(@"hh\:mm\:ss")</td>
+                        <td>@d.Bitis.ToString(@"hh\:mm\:ss")</td>
+                        <td>@d.DurusNedeni</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<form method="post">
+    <button type="submit" asp-page-handler="Hesapla" class="hesapla-btn">
+        Tablo 3'ü Hesapla
+    </button>
+</form>
+
+@if (Model.Tablo3 is not null)
+{
+    <section class="cikti">
+        <h2>Tablo 3 — Üretim Operasyon Bildirimleri (Hesaplanan)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kayıt No</th><th>Başlangıç</th><th>Bitiş</th>
+                    <th>Toplam Süre</th><th>Statü</th><th>Duruş Nedeni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var k in Model.Tablo3)
+                {
+                    <tr class="@(k.Statu == "DURUŞ" ? "durus" : "uretim")">
+                        <td>@k.KayitNo</td>
+                        <td>@k.Baslangic.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@k.Bitis.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@k.ToplamSureMetin</td>
+                        <td>@k.Statu</td>
+                        <td>@k.DurusNedeni</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+}

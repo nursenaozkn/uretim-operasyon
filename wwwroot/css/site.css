@@ -1,0 +1,77 @@
+:root {
+    --kenar: #d0d7de;
+    --baslik: #0b3d6b;
+    --uretim: #ffffff;
+    --durus: #fff4d6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    color: #1f2328;
+    background: #f6f8fa;
+}
+
+.kapsayici {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+h1 { color: var(--baslik); }
+h2 { color: var(--baslik); font-size: 1.1rem; margin-bottom: 8px; }
+
+.aciklama {
+    background: #eef4fb;
+    border: 1px solid #cfe0f3;
+    border-radius: 8px;
+    padding: 12px 16px;
+    line-height: 1.5;
+}
+
+.tablolar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.tablolar section { flex: 1 1 320px; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 0.9rem;
+}
+
+th, td {
+    border: 1px solid var(--kenar);
+    padding: 6px 10px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+thead th {
+    background: var(--baslik);
+    color: #fff;
+    font-weight: 600;
+}
+
+.hesapla-btn {
+    margin: 24px 0;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #0969da;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hesapla-btn:hover { background: #0b5ed7; }
+
+.cikti table tbody tr.uretim { background: var(--uretim); }
+.cikti table tbody tr.durus { background: var(--durus); }
