@@ -1,0 +1,17 @@
+name: Keep Alive
+
+# Render ücretsiz katmanı ~15 dk trafik almazsa uykuya geçer.
+# Bu iş her 10 dakikada bir siteye istek atarak servisi uyanık tutar.
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # her 10 dakikada bir
+  workflow_dispatch:          # elle de tetiklenebilir
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Siteyi uyandir
+        run: |
+          code=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 90 https://uretim-operasyon.onrender.com/ || echo "000")
+          echo "HTTP durum kodu: $code"
