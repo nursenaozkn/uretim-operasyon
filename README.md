@@ -4,6 +4,11 @@ ASP.NET Core (.NET 8) Razor Pages ile geliştirilmiş web uygulaması. Bir üret
 makinesindeki operasyon bildirimlerine (Tablo 1) standart molaları (Tablo 2)
 **otomatik** yerleştirerek düzeltilmiş çıktıyı (Tablo 3) hesaplar.
 
+**🔗 Canlı Demo:** https://uretim-operasyon.onrender.com
+
+> Render ücretsiz katmanında barındırılır; uzun süre kullanılmadıysa ilk açılış
+> ~30-60 sn sürebilir. Sayfa açıldıktan birkaç saniye sonra butona basın.
+
 ## Problem
 
 Sahadan iş bildirimi yapan operatörler çay/yemek molası gibi **standart duruşları**
@@ -80,10 +85,20 @@ docker run -p 8080:8080 -e PORT=8080 uretim-operasyon
 
 ## Render.com'a Deploy
 
+Bu uygulama Render'a deploy edilmiştir ve canlıdır:
+**https://uretim-operasyon.onrender.com**
+
+Kendiniz deploy etmek için:
+
 1. Bu klasörü bir GitHub reposunun köküne push edin (Dockerfile repo kökünde olmalı).
 2. [render.com](https://render.com) → **New → Web Service** → repoyu seçin.
 3. Render `Dockerfile`'ı algılar. Instance Type: **Free** → **Create Web Service**.
 4. `PORT` ortam değişkenini Render otomatik sağlar (`Program.cs` bunu okur).
+5. `main` dalına yapılan her push otomatik olarak yeniden deploy edilir (`autoDeploy`).
+
+> **Uyku modu:** Render ücretsiz katmanı ~15 dk trafik almazsa uykuya geçer. Servisi
+> uyanık tutmak için repodaki `.github/workflows/keep-alive.yml` her 10 dakikada bir
+> siteye istek atar.
 
 ## Teknolojiler
 
